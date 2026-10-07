@@ -1,0 +1,1027 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Modalverben interaktiv</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Golos+Text:wght@400;500;600;700&family=Jost:wght@500;600;700&display=swap">
+<style>
+/* Layout: one workbook column on squared paper (Karopapier); three pages by tab; every exercise is its own sheet.
+   Colour code used everywhere: blue = modal verb (Position 2), amber = infinitive (Satzende). */
+:root{
+  --paper:#f3f6fb; --grid:#dde5f1; --sheet:#ffffff; --ink:#1a2340; --ink-soft:#56617c; --line:#ccd5e3;
+  --blue:#1f3fbf; --blue-wash:#e7ecfc; --on-blue:#ffffff;
+  --amber:#a85400; --amber-wash:#fdeeda;
+  --ok:#157a46; --ok-wash:#e1f4e9; --bad:#c4252b; --bad-wash:#fde7e7; --note:#fff2a8; --note-ink:#3a3200;
+  --sign-red:#c8102e; --sign-blue:#0b4ea2; --sign-white:#ffffff; --sign-black:#14161c;
+  --f-display:"Jost","Century Gothic","Trebuchet MS",sans-serif;
+  --f-body:"Golos Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --f-hand:"Caveat","Segoe Print","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11141c; --grid:#1b2130; --sheet:#191e2b; --ink:#e7ebf6; --ink-soft:#a2adc5; --line:#333c51;
+    --blue:#93a9ff; --blue-wash:#222c54; --on-blue:#0d1230;
+    --amber:#f2a955; --amber-wash:#3a2912;
+    --ok:#62d293; --ok-wash:#143524; --bad:#ff8080; --bad-wash:#421b1f; --note:#4b4418; --note-ink:#fff6c4;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11141c; --grid:#1b2130; --sheet:#191e2b; --ink:#e7ebf6; --ink-soft:#a2adc5; --line:#333c51;
+  --blue:#93a9ff; --blue-wash:#222c54; --on-blue:#0d1230;
+  --amber:#f2a955; --amber-wash:#3a2912;
+  --ok:#62d293; --ok-wash:#143524; --bad:#ff8080; --bad-wash:#421b1f; --note:#4b4418; --note-ink:#fff6c4;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{font-size:100%}
+body{
+  margin:0; background:var(--paper); color:var(--ink); font-family:var(--f-body); font-size:1.125rem; line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:1.5rem 1.5rem;
+}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0}
+.ua{color:var(--ink-soft);font-size:.9em}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--sheet);border-bottom:2px solid var(--blue)}
+.top-in{max-width:62rem;margin:0 auto;padding:.5rem 1rem;display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}
+.brand{font-family:var(--f-display);font-weight:700;font-size:1.25rem;letter-spacing:.01em;margin-right:auto}
+.brand small{display:block;font-family:var(--f-body);font-weight:400;font-size:.75rem;color:var(--ink-soft)}
+.tabs{display:flex;flex-wrap:wrap;gap:.25rem}
+.tab{border:1px solid var(--line);background:var(--sheet);border-radius:999px;padding:.35rem .9rem;cursor:pointer;font-weight:600;font-size:.95rem}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.size{display:flex;gap:.25rem}
+.size button{border:1px solid var(--line);background:var(--sheet);border-radius:6px;min-width:2.25rem;height:2.25rem;cursor:pointer;font-weight:700}
+
+.wrap{max-width:62rem;margin:0 auto;padding-inline:1rem;padding-block:1.5rem 6rem;display:flex;flex-direction:column;gap:1.5rem}
+.page{display:flex;flex-direction:column;gap:1.5rem}
+.lead{display:flex;flex-direction:column;gap:.35rem;background:var(--sheet);border-left:6px solid var(--blue);padding:1rem 1.25rem}
+.eyebrow{font-family:var(--f-display);font-weight:600;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+.lead h1{font-size:clamp(1.6rem,4vw,2.4rem)}
+.jump{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.5rem}
+.jump button{border:1px solid var(--line);background:var(--paper);border-radius:6px;padding:.2rem .6rem;cursor:pointer;font-size:.85rem;font-weight:600;font-variant-numeric:tabular-nums}
+.jump button.done{border-color:var(--amber);color:var(--amber);background:var(--amber-wash)}
+.jump button.full{border-color:var(--ok);color:var(--ok);background:var(--ok-wash)}
+
+.sheet{background:var(--sheet);border:1px solid var(--line);border-radius:6px;padding:1.25rem;display:flex;flex-direction:column;gap:1rem;min-width:0}
+.sheet h2{font-size:1.5rem}
+.scroll{overflow-x:auto;max-width:100%}
+
+/* colour code */
+.p2{color:var(--blue);font-weight:700}
+.end{color:var(--amber);font-weight:700}
+.legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;font-size:.9rem}
+.legend span::before{content:"";display:inline-block;width:.8em;height:.8em;border-radius:2px;margin-right:.4em;vertical-align:-.05em}
+.legend .l-p2::before{background:var(--blue)} .legend .l-end::before{background:var(--amber)}
+
+/* conjugation table */
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;align-self:flex-start}
+.seg button{border:0;background:var(--sheet);padding:.35rem .9rem;cursor:pointer;font-weight:600;font-size:.95rem}
+.seg button[aria-pressed="true"]{background:var(--blue);color:var(--on-blue)}
+table{border-collapse:collapse;width:100%}
+.konj th,.konj td{border:1px solid var(--line);padding:.4rem .6rem;text-align:left;white-space:nowrap}
+.konj thead th{background:var(--blue-wash);padding:0}
+.konj thead th:first-child{background:transparent;border-top-color:transparent;border-left-color:transparent}
+.konj .vh{display:block;width:100%;border:0;background:transparent;padding:.45rem .6rem;text-align:left;cursor:pointer;font-family:var(--f-display);font-weight:700;font-size:1.05rem}
+.konj tbody th{font-weight:600;color:var(--ink-soft);background:var(--paper)}
+.konj td.hi,.konj th.hi{background:var(--note);color:var(--note-ink)}
+.konj .form.same{color:var(--blue);font-weight:700}
+.konj td.hi .form.same{color:inherit}
+.konj .vok{background:transparent;color:var(--amber);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
+.konj td.hi .vok{color:inherit}
+.konj .gap{display:none}
+.konj.train .form{display:none}
+.konj.train .gap{display:inline-block}
+.rules{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.rules .ua{display:block}
+
+/* sentence frame table */
+.klammer{min-width:30rem}
+.klammer th,.klammer td{border-bottom:1px solid var(--line);padding:.45rem .6rem;text-align:left}
+.klammer thead th{font-family:var(--f-display);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.klammer td.c-p2{background:var(--blue-wash)} .klammer td.c-end{background:var(--amber-wash)}
+.klammer thead .c-p2{color:var(--blue)} .klammer thead .c-end{color:var(--amber)}
+
+/* usage list */
+.usage{display:flex;flex-direction:column}
+.u-row{display:grid;grid-template-columns:8.5rem minmax(0,1fr) minmax(0,1.1fr);gap:.25rem 1rem;padding:.7rem 0;border-top:1px solid var(--line)}
+.u-row:first-child{border-top:0}
+.u-verb{font-family:var(--f-display);font-weight:700;font-size:1.15rem;color:var(--blue)}
+.u-row ol{margin:0;padding-left:1.2rem}
+.u-ex{display:flex;flex-direction:column;gap:.2rem;font-family:var(--f-hand);font-size:1.45rem;line-height:1.25}
+.usage.no-ua .ua{display:none}
+@media (max-width:44rem){.u-row{grid-template-columns:1fr}}
+
+/* exercises */
+.ex-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:.25rem .75rem}
+.ex-nr{font-family:var(--f-display);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;color:var(--on-blue);background:var(--blue);padding:.15rem .6rem;border-radius:4px;white-space:nowrap}
+.ex-lv{font-family:var(--f-display);font-weight:700;font-size:.75rem;color:var(--amber);border:1.5px solid var(--amber);border-radius:999px;padding:0 .45rem}
+.ex-head h3{font-size:1.2rem;flex:1 1 14rem;min-width:0}
+.ex-head .ua{flex-basis:100%}
+.ex-body{display:flex;flex-direction:column;gap:.75rem;min-width:0}
+.ex-foot{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;border-top:1px dashed var(--line);padding-top:.9rem}
+.reading .ex-foot{display:none}
+.btn{border:1.5px solid var(--line);background:var(--sheet);border-radius:8px;padding:.45rem 1rem;cursor:pointer;font-weight:600}
+.btn.primary{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.btn:hover{border-color:var(--blue)}
+.score{font-weight:700;margin-left:auto;font-variant-numeric:tabular-nums}
+.score.full{color:var(--ok)} .score.part{color:var(--amber)}
+.bank{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.95rem}
+.bank b{font-weight:600;color:var(--ink-soft);margin-right:.25rem}
+.bank span{border:1px solid var(--line);border-radius:4px;padding:.05rem .5rem;background:var(--paper);font-weight:600}
+
+.gaptext{line-height:2.5}
+.gap{border:0;border-bottom:2px solid var(--ink-soft);background:var(--blue-wash);color:var(--blue);font-weight:700;text-align:center;border-radius:4px 4px 0 0;padding:.1rem .3rem;max-width:100%;line-height:1.3}
+.gap.ok{background:var(--ok-wash);color:var(--ok);border-color:var(--ok)}
+.gap.bad{background:var(--bad-wash);color:var(--bad);border-color:var(--bad)}
+.gap.shown{background:var(--note);color:var(--note-ink);border-color:var(--ink-soft)}
+.gnote{font-size:.8rem;color:var(--ink-soft);margin-left:.3rem;font-style:italic}
+.gnote:empty{display:none}
+.dlg{display:flex;flex-direction:column;gap:.1rem}
+.dl{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:.5rem;line-height:2.5}
+.sp{font-weight:700}
+@media (max-width:36rem){.dl{grid-template-columns:1fr;gap:0}.dl .sp{line-height:1.4;margin-top:.5rem}}
+.scene{font-family:var(--f-hand);font-size:1.5rem;color:var(--ink-soft);line-height:1}
+
+/* tick grid */
+.grid th,.grid td{border:1px solid var(--line);padding:.3rem;text-align:center}
+.grid thead th{font-family:var(--f-display);background:var(--blue-wash);padding:.4rem .6rem}
+.grid tbody th{text-align:left;padding:.4rem .6rem;white-space:nowrap;background:var(--paper)}
+.grid .rest{font-family:var(--f-hand);font-size:1.4rem;border:0;text-align:left;padding-left:1rem;white-space:nowrap}
+.tick{width:2.4rem;height:2.1rem;border:1.5px solid var(--line);border-radius:6px;background:var(--sheet);cursor:pointer;font-weight:700;font-size:1.1rem;line-height:1;color:var(--blue)}
+.tick[aria-pressed="true"]{background:var(--blue-wash);border-color:var(--blue)}
+.tick.ok{background:var(--ok-wash);border-color:var(--ok);color:var(--ok)}
+.tick.bad{background:var(--bad-wash);border-color:var(--bad);color:var(--bad)}
+.tick.miss{border-style:dashed;border-color:var(--amber);color:var(--amber)}
+
+/* word order */
+.ord{display:flex;flex-direction:column;gap:.4rem;padding:.6rem 0;border-top:1px solid var(--line)}
+.ord:first-child{border-top:0;padding-top:0}
+.ord-line{display:flex;align-items:flex-end;gap:.5rem}
+.ord-n{font-weight:700;color:var(--blue);min-width:1.4rem}
+.ord-ans{flex:1;min-width:0;min-height:2.7rem;display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;border-bottom:2px solid var(--ink-soft);padding:.25rem}
+.ord-ans.ok{border-color:var(--ok);background:var(--ok-wash)} .ord-ans.bad{border-color:var(--bad);background:var(--bad-wash)}
+.ord-end{font-weight:700;font-size:1.3rem}
+.ord-bank{display:flex;flex-wrap:wrap;gap:.35rem;min-height:2.3rem;padding-left:1.9rem}
+.chip{border:1.5px solid var(--blue);background:var(--sheet);color:var(--blue);border-radius:6px;padding:.2rem .7rem;cursor:pointer;font-weight:600}
+.ord-ans .chip{background:var(--blue-wash)}
+.sol{font-family:var(--f-hand);font-size:1.4rem;color:var(--ink-soft);line-height:1.2;padding-left:1.9rem}
+.sol:empty{display:none}
+
+/* sentence writing */
+.wr{display:flex;flex-direction:column;gap:.3rem;padding:.6rem 0;border-top:1px solid var(--line)}
+.wr:first-child{border-top:0;padding-top:0}
+.wr-hint{display:flex;flex-wrap:wrap;gap:.25rem .6rem;align-items:baseline}
+.wr-hint .verb{font-family:var(--f-display);font-weight:700;color:var(--blue)}
+.wr input{width:100%;border:0;border-bottom:2px solid var(--ink-soft);background:var(--blue-wash);color:var(--blue);font-weight:600;padding:.35rem .5rem;border-radius:4px 4px 0 0}
+.wr input.ok{background:var(--ok-wash);color:var(--ok);border-color:var(--ok)}
+.wr input.bad{background:var(--bad-wash);color:var(--bad);border-color:var(--bad)}
+.wr .sol{padding-left:0}
+
+/* signs */
+.signs{display:grid;grid-template-columns:repeat(auto-fill,minmax(5.5rem,1fr));gap:.6rem}
+.sign{display:flex;flex-direction:column;align-items:center;gap:.2rem;border:1px solid var(--line);border-radius:6px;padding:.5rem;background:var(--paper)}
+.sign svg{width:4rem;height:4rem;display:block}
+.sign b{font-family:var(--f-display);font-size:1rem}
+.srow{display:flex;gap:.6rem;align-items:baseline;line-height:2.5}
+.srow select{border:1.5px solid var(--line);border-radius:6px;background:var(--sheet);padding:.15rem .3rem;font-weight:700}
+.srow select.ok{border-color:var(--ok);background:var(--ok-wash);color:var(--ok)}
+.srow select.bad{border-color:var(--bad);background:var(--bad-wash);color:var(--bad)}
+.srow select.shown{background:var(--note);color:var(--note-ink)}
+.slist{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,22rem),1fr));gap:0 1.5rem}
+
+/* pick 1/2/3 */
+.keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,13rem),1fr));gap:.5rem}
+.keys div{border:1px solid var(--line);border-radius:6px;padding:.4rem .7rem;background:var(--paper)}
+.keys b{color:var(--blue);font-family:var(--f-display);font-size:1.15rem;margin-right:.3rem}
+.pick{display:inline-flex;gap:2px;vertical-align:middle;margin:0 .25rem}
+.pick button{width:1.9rem;height:1.9rem;border:1.5px solid var(--line);background:var(--sheet);border-radius:50%;cursor:pointer;font-weight:700;font-size:.9rem;line-height:1;color:var(--blue);padding:0}
+.pick button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:var(--on-blue)}
+.pick.ok button[aria-pressed="true"]{background:var(--ok);border-color:var(--ok);color:var(--sheet)}
+.pick.bad button[aria-pressed="true"]{background:var(--bad);border-color:var(--bad);color:var(--sheet)}
+.pick button.right{border-color:var(--ok);border-style:dashed;color:var(--ok)}
+.mk{line-height:2.5}
+
+.sticky-note{align-self:flex-start;background:var(--note);color:var(--note-ink);font-family:var(--f-hand);font-size:1.45rem;line-height:1.2;padding:.4rem .9rem;transform:rotate(-1deg)}
+
+/* result */
+.res th,.res td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.res td:last-child,.res th:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.res tfoot td{font-weight:700;font-size:1.15rem;border-bottom:0;border-top:2px solid var(--ink)}
+.name{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}
+.name input{flex:1 1 14rem;min-width:0;border:0;border-bottom:2px solid var(--ink-soft);background:var(--blue-wash);padding:.35rem .5rem;font-family:var(--f-hand);font-size:1.5rem;color:var(--blue)}
+.next{align-self:flex-end}
+
+/* umlaut keys */
+.uml{position:fixed;right:.75rem;bottom:0;z-index:30;display:flex;gap:.3rem;background:var(--sheet);border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0;padding:.4rem .5rem calc(.4rem + env(safe-area-inset-bottom,0px))}
+.uml button{width:2.5rem;height:2.5rem;border:1.5px solid var(--blue);background:var(--blue-wash);color:var(--blue);border-radius:6px;font-weight:700;font-size:1.15rem;cursor:pointer}
+.foot{font-size:.85rem;color:var(--ink-soft)}
+@media (prefers-reduced-motion:no-preference){.chip,.tick,.btn{transition:background-color .12s,border-color .12s}}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <div class="brand">Modalverben<small>müssen · können · dürfen · wollen · sollen · möchten</small></div>
+    <nav class="tabs" role="tablist" aria-label="Розділи">
+      <button class="tab" type="button" role="tab" data-tab="lektion5" aria-selected="true">Lektion 5</button>
+      <button class="tab" type="button" role="tab" data-tab="lektion6" aria-selected="false">Lektion 6</button>
+      <button class="tab" type="button" role="tab" data-tab="ergebnis" aria-selected="false">Результат</button>
+    </nav>
+    <div class="size" aria-label="Розмір тексту">
+      <button type="button" id="size-down" aria-label="Менший текст">A−</button>
+      <button type="button" id="size-up" aria-label="Більший текст">A+</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ===================== LEKTION 5 ===================== -->
+<div class="page" id="lektion5">
+  <div class="lead">
+    <p class="eyebrow">Lektion 5 · A1</p>
+    <h1>Formen und Position im Satz</h1>
+    <p class="ua">Як відмінюються модальні дієслова і де вони стоять у реченні.</p>
+    <div class="jump" data-jump="lektion5"></div>
+  </div>
+
+  <section class="sheet reading" id="ex-k"></section>
+
+  <section class="sheet">
+    <p class="eyebrow">Grammatik</p>
+    <h2>Position im Satz</h2>
+    <p>Das Modalverb steht auf <span class="p2">Position 2</span>. Das zweite Verb steht im Infinitiv am <span class="end">Ende</span>.</p>
+    <p class="ua">Модальне дієслово стоїть на другому місці, а друге дієслово в інфінітиві — у самому кінці речення.</p>
+    <div class="scroll">
+      <table class="klammer">
+        <thead><tr><th>Position 1</th><th class="c-p2">Position 2</th><th>Mitte</th><th class="c-end">Ende</th></tr></thead>
+        <tbody>
+          <tr><td>Ich</td><td class="c-p2 p2">kann</td><td>heute nicht lange</td><td class="c-end end">schlafen.</td></tr>
+          <tr><td>Morgen</td><td class="c-p2 p2">müssen</td><td>wir sehr früh</td><td class="c-end end">aufstehen.</td></tr>
+          <tr><td>Meine Schwester</td><td class="c-p2 p2">will</td><td>am Samstag ins Kino</td><td class="c-end end">gehen.</td></tr>
+          <tr><td>Ihr</td><td class="c-p2 p2">dürft</td><td>hier nicht</td><td class="c-end end">fotografieren.</td></tr>
+          <tr><td>Wann</td><td class="c-p2 p2">sollen</td><td>wir</td><td class="c-end end">kommen?</td></tr>
+          <tr><td>Ich</td><td class="c-p2 p2">möchte</td><td>einen Tee</td><td class="c-end end">(trinken).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Ist der Kontext klar, kann der Infinitiv fehlen: <i>Ich möchte einen Tee.</i></p>
+    <p class="ua">Якщо з контексту все зрозуміло, інфінітив можна не казати.</p>
+  </section>
+
+  <section class="sheet" id="ex-5-1a"></section>
+  <section class="sheet" id="ex-5-1b"></section>
+  <section class="sheet" id="ex-5-1c"></section>
+  <section class="sheet" id="ex-5-1d"></section>
+  <section class="sheet" id="ex-5-1e"></section>
+  <section class="sheet" id="ex-5-1f"></section>
+  <section class="sheet" id="ex-5-2"></section>
+  <section class="sheet" id="ex-5-3"></section>
+  <section class="sheet" id="ex-5-4"></section>
+  <button class="btn primary next" type="button" data-go="lektion6">Weiter: Lektion 6 →</button>
+</div>
+
+<!-- ===================== LEKTION 6 ===================== -->
+<div class="page" id="lektion6" hidden>
+  <div class="lead">
+    <p class="eyebrow">Lektion 6 · A1–A2</p>
+    <h1>Welches Modalverb passt?</h1>
+    <p class="ua">Що означає кожне модальне дієслово і коли його вживати.</p>
+    <div class="jump" data-jump="lektion6"></div>
+  </div>
+
+  <section class="sheet">
+    <p class="eyebrow">Grammatik</p>
+    <h2>Gebrauch</h2>
+    <button class="btn" type="button" id="ua-toggle" aria-pressed="true" style="align-self:flex-start">Сховати переклад</button>
+    <div class="usage" id="usage">
+      <div class="u-row">
+        <div class="u-verb">müssen</div>
+        <div>Es ist nötig. Ich habe keine Wahl.<div class="ua">мушу, треба — іншого варіанту немає</div></div>
+        <div class="u-ex"><span>Ich <span class="p2">muss</span> um sieben Uhr <span class="end">aufstehen</span>.</span><span>Wir <span class="p2">müssen</span> für den Test <span class="end">lernen</span>.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">können</div>
+        <div><ol><li>Fähigkeit: Ich weiß, wie das geht.<div class="ua">вмію</div></li><li>Möglichkeit: Es ist möglich.<div class="ua">є можливість</div></li><li>Erlaubnis: Es ist okay (= dürfen).<div class="ua">можна, не заборонено</div></li></ol></div>
+        <div class="u-ex"><span>Meine Oma <span class="p2">kann</span> Klavier <span class="end">spielen</span>.</span><span>Im Park <span class="p2">kann</span> man Tennis <span class="end">spielen</span>.</span><span>Du <span class="p2">kannst</span> mein Handy <span class="end">nehmen</span>.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">dürfen</div>
+        <div>Es ist erlaubt.<div class="ua">можна, дозволено</div></div>
+        <div class="u-ex"><span>Am Samstag <span class="p2">darf</span> ich lange <span class="end">aufbleiben</span>.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">nicht dürfen</div>
+        <div>Es ist verboten.<div class="ua">не можна, заборонено</div></div>
+        <div class="u-ex"><span>Im Museum <span class="p2">darf</span> man nichts <span class="end">anfassen</span>.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">„möchten“</div>
+        <div>Ein Wunsch, höflich.<div class="ua">хотів би / хотіла б — ввічливо</div></div>
+        <div class="u-ex"><span>Ich <span class="p2">möchte</span> bitte ein Eis.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">wollen</div>
+        <div>Ein Wunsch oder Plan, direkt und stark.<div class="ua">хочу — прямо; коли щось просиш в іншої людини, звучить неввічливо</div></div>
+        <div class="u-ex"><span>Ich <span class="p2">will</span> Tierärztin <span class="end">werden</span>.</span></div>
+      </div>
+      <div class="u-row">
+        <div class="u-verb">sollen</div>
+        <div><ol><li>Vorschlag oder Angebot, nur in Fragen.<div class="ua">пропозиція: «Мені зробити…?», «Може, підемо…?»</div></li><li>Eine andere Person sagt: „Du musst …“, und ich erzähle das.<div class="ua">хтось інший сказав, що я маю це зробити</div></li></ol></div>
+        <div class="u-ex"><span><span class="p2">Soll</span> ich das Fenster <span class="end">aufmachen</span>?</span><span>Die Trainerin sagt, wir <span class="p2">sollen</span> jeden Tag <span class="end">trainieren</span>.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sheet" id="ex-6-1"></section>
+  <section class="sheet" id="ex-6-2"></section>
+  <section class="sheet" id="ex-6-3"></section>
+  <section class="sheet" id="ex-6-4"></section>
+  <section class="sheet" id="ex-6-5"></section>
+  <section class="sheet" id="ex-6-6"></section>
+  <section class="sheet" id="ex-6-7"></section>
+  <button class="btn primary next" type="button" data-go="ergebnis">Zum Ergebnis →</button>
+</div>
+
+<!-- ===================== ERGEBNIS ===================== -->
+<div class="page" id="ergebnis" hidden>
+  <div class="lead">
+    <p class="eyebrow">Ergebnis</p>
+    <h1>Mein Ergebnis</h1>
+    <p class="ua">Тут зібрані бали за всі вправи, які ти перевірив(-ла). Зроби знімок екрана і надішли вчителю.</p>
+  </div>
+  <section class="sheet">
+    <label class="name" for="student-name"><span>Name:</span><input type="text" id="student-name" autocomplete="off" placeholder="Vorname Nachname"></label>
+    <div class="scroll">
+      <table class="res">
+        <thead><tr><th>Übung</th><th>Richtig</th></tr></thead>
+        <tbody id="res-body"></tbody>
+        <tfoot><tr><td>Gesamt</td><td id="res-total">—</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="ex-foot">
+      <button class="btn" type="button" id="wipe">Очистити всі відповіді</button>
+    </div>
+  </section>
+  <p class="foot">Вправи складено за темою розділів 5 і 6 «Modalverben». Відповіді зберігаються лише в цьому браузері.</p>
+</div>
+
+</main>
+
+<div class="uml" aria-label="Німецькі літери">
+  <button type="button" data-ch="ä">ä</button><button type="button" data-ch="ö">ö</button><button type="button" data-ch="ü">ü</button><button type="button" data-ch="ß">ß</button>
+</div>
+
+<script>
+(function(){
+'use strict';
+var $ = function(s,r){return (r||document).querySelector(s)};
+var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+function el(tag, attrs){
+  var e = document.createElement(tag), k, v, i, c;
+  attrs = attrs || {};
+  for (k in attrs){
+    v = attrs[k];
+    if (k === 'class') e.className = v;
+    else if (k.slice(0,2) === 'on') e.addEventListener(k.slice(2), v);
+    else if (v !== false && v != null) e.setAttribute(k, v === true ? '' : v);
+  }
+  for (i = 2; i < arguments.length; i++){
+    c = arguments[i];
+    if (c == null) continue;
+    if (Array.isArray(c)) c.forEach(function(x){ if (x != null) e.append(x); });
+    else e.append(c);
+  }
+  return e;
+}
+
+/* ---------- storage (per-browser convenience only) ---------- */
+var KEY = 'modalverben-v1';
+var saved = {};
+try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) { saved = {}; }
+saved.v = saved.v || {}; saved.w = saved.w || {}; saved.s = saved.s || {};
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {} }
+
+/* ---------- helpers ---------- */
+function norm(s){
+  return String(s).trim().toLowerCase().replace(/\s+/g,' ').replace(/ae/g,'ä').replace(/oe/g,'ö').replace(/ue/g,'ü');
+}
+function normSent(s){
+  return norm(String(s).replace(/[„“”"«»]/g,'')).replace(/\s*[.?!]+$/,'').replace(/\s+([,?.!])/g,'$1');
+}
+function parse(text){
+  var parts = [], re = /\{([^}]+)\}/g, last = 0, m;
+  while ((m = re.exec(text))){
+    if (m.index > last) parts.push(text.slice(last, m.index));
+    parts.push({a: m[1].split('|')});
+    last = re.lastIndex;
+  }
+  if (last < text.length) parts.push(text.slice(last));
+  return parts;
+}
+
+/* ---------- gaps ---------- */
+function makeGap(id, answers, only){
+  var w = Math.max.apply(null, answers.map(function(a){return a.length})) + 2;
+  var inp = el('input', {class:'gap', type:'text', id:id, autocomplete:'off', autocapitalize:'off', spellcheck:'false', 'aria-label':'Lücke', style:'width:'+w+'ch'});
+  inp.value = saved.v[id] || '';
+  return {inp:inp, note:el('span',{class:'gnote'}), answers:answers, only:only};
+}
+function setVal(inp, v){ inp.value = v; saved.v[inp.id] = v; }
+function checkGap(g){
+  var v = norm(g.inp.value), i = -1, k;
+  g.inp.classList.remove('ok','bad','shown'); g.note.textContent = '';
+  for (k = 0; k < g.answers.length; k++) if (norm(g.answers[k]) === v) { i = k; break; }
+  if (!v || i < 0){ g.inp.classList.add('bad'); return false; }
+  g.inp.classList.add('ok'); setVal(g.inp, g.answers[i]);
+  if (g.answers.length > 1) g.note.textContent = 'auch: ' + g.answers.filter(function(_,j){return j!==i}).join(', ');
+  else if (g.only) g.note.textContent = g.only;
+  return true;
+}
+function revealGap(g){
+  g.inp.classList.remove('ok','bad'); g.inp.classList.add('shown'); setVal(g.inp, g.answers[0]);
+  g.note.textContent = g.answers.length > 1 ? 'auch: ' + g.answers.slice(1).join(', ') : (g.only || '');
+}
+function resetGap(g){ g.inp.classList.remove('ok','bad','shown'); setVal(g.inp, ''); g.note.textContent = ''; }
+function gapApi(gaps){
+  return {
+    check: function(){ var c = 0; gaps.forEach(function(g){ if (checkGap(g)) c++; }); return {c:c, t:gaps.length}; },
+    reveal: function(){ gaps.forEach(revealGap); },
+    reset: function(){ gaps.forEach(resetGap); }
+  };
+}
+function fillText(box, text, id, gaps, only){
+  parse(text).forEach(function(p){
+    if (typeof p === 'string') { box.append(p); return; }
+    var g = makeGap(id + '-g' + gaps.length, p.a, p.a.length === 1 ? only : null);
+    gaps.push(g); box.append(g.inp, g.note);
+  });
+}
+function bank(label, words){
+  var b = el('div', {class:'bank'}, el('b', {}, label));
+  words.forEach(function(w){ b.append(el('span', {}, w)); });
+  return b;
+}
+
+/* ---------- exercise frame ---------- */
+var EX = [];
+function exercise(meta, build){
+  var host = document.getElementById('ex-' + meta.id);
+  var head = el('div', {class:'ex-head'},
+    el('span', {class:'ex-nr'}, meta.nr),
+    meta.lv ? el('span', {class:'ex-lv'}, meta.lv) : null,
+    el('h3', {}, meta.de),
+    el('p', {class:'ua'}, meta.ua));
+  var body = el('div', {class:'ex-body'});
+  var score = el('span', {class:'score', 'aria-live':'polite'});
+  var api = build(body, meta.id, host);
+  function show(r){
+    score.className = 'score ' + (r.c === r.t ? 'full' : 'part');
+    score.textContent = 'Правильно: ' + r.c + ' з ' + r.t;
+  }
+  var foot = el('div', {class:'ex-foot'},
+    el('button', {class:'btn primary', type:'button', onclick:function(){
+      var r = api.check(); saved.s[meta.id] = r; save(); show(r); refresh();
+    }}, 'Перевірити'),
+    el('button', {class:'btn', type:'button', onclick:function(){
+      api.reveal(); save(); score.className = 'score'; score.textContent = 'Відповіді показано';
+    }}, 'Показати відповіді'),
+    el('button', {class:'btn', type:'button', onclick:function(){
+      api.reset(); delete saved.s[meta.id]; save(); score.className = 'score'; score.textContent = ''; refresh();
+    }}, 'Скинути'),
+    score);
+  host.append(head, body, foot);
+  if (saved.s[meta.id]) show(saved.s[meta.id]);
+  EX.push({meta:meta, host:host, api:api, clear:function(){ api.reset(); score.className='score'; score.textContent=''; }});
+}
+
+/* =====================================================================
+   LEKTION 5
+   ===================================================================== */
+var PRON = ['ich','du','er, sie, es, man','wir','ihr','sie, Sie'];
+var VERBS = [
+  ['müssen', ['muss','musst','muss','müssen','müsst','müssen'], true],
+  ['können', ['kann','kannst','kann','können','könnt','können'], true],
+  ['dürfen', ['darf','darfst','darf','dürfen','dürft','dürfen'], true],
+  ['wollen', ['will','willst','will','wollen','wollt','wollen'], true],
+  ['sollen', ['soll','sollst','soll','sollen','sollt','sollen'], false],
+  ['„möchten“', ['möchte','möchtest','möchte','möchten','möchtet','möchten'], false]
+];
+
+exercise({id:'k', nr:'Tabelle', short:'Tab.', de:'Konjugation', ua:'Натисни на дієслово вгорі, щоб підсвітити стовпчик. У режимі «Тренуватися» заповни таблицю самостійно.'}, function(body, id, host){
+  var gaps = [];
+  var table = el('table', {class:'konj'});
+  var hr = el('tr', {}, el('th', {}));
+  VERBS.forEach(function(v, ci){
+    hr.append(el('th', {'data-c':ci}, el('button', {class:'vh', type:'button', onclick:function(){
+      var on = !hr.children[ci+1].classList.contains('hi');
+      $$('.hi', table).forEach(function(x){ x.classList.remove('hi'); });
+      if (on) $$('[data-c="'+ci+'"]', table).forEach(function(x){ x.classList.add('hi'); });
+    }}, v[0])));
+  });
+  table.append(el('thead', {}, hr));
+  var tb = el('tbody');
+  PRON.forEach(function(p, ri){
+    var tr = el('tr', {}, el('th', {scope:'row'}, p));
+    VERBS.forEach(function(v, ci){
+      var f = v[1][ri], span = el('span', {class:'form' + ((ri===0||ri===2) ? ' same' : '')});
+      if (v[2] && ri < 3) span.append(f.charAt(0), el('mark', {class:'vok'}, f.charAt(1)), f.slice(2));
+      else span.textContent = f;
+      var g = makeGap(id + '-' + ci + '-' + ri, [f]);
+      g.inp.setAttribute('aria-label', p + ' + ' + v[0]);
+      gaps.push(g);
+      tr.append(el('td', {'data-c':ci}, span, g.inp));
+    });
+    tb.append(tr);
+  });
+  table.append(tb);
+
+  var bRead = el('button', {type:'button', 'aria-pressed':'true'}, 'Читати');
+  var bTrain = el('button', {type:'button', 'aria-pressed':'false'}, 'Тренуватися');
+  function mode(train){
+    table.classList.toggle('train', train); host.classList.toggle('reading', !train);
+    bRead.setAttribute('aria-pressed', String(!train)); bTrain.setAttribute('aria-pressed', String(train));
+    saved.w.kmode = train ? 1 : 0; save();
+  }
+  bRead.addEventListener('click', function(){ mode(false); });
+  bTrain.addEventListener('click', function(){ mode(true); });
+  if (saved.w.kmode) mode(true);
+
+  var rules = el('ul', {class:'rules'});
+  rules.innerHTML =
+    '<li><b>ich</b> und <b>er / sie / es</b> haben die gleiche Form und keine Endung: ich <span class="p2">kann</span>, er <span class="p2">kann</span>.<span class="ua">1-ша і 3-тя особа однини однакові й не мають закінчення.</span></li>' +
+    '<li>Im Singular wechselt der Vokal bei <i>müssen, können, dürfen</i> und <i>wollen</i>: m<b>ü</b>ssen → ich m<b>u</b>ss, w<b>o</b>llen → ich w<b>i</b>ll.<span class="ua">В однині в цих чотирьох дієсловах змінюється голосна. У <i>sollen</i> і <i>möchten</i> вона не змінюється.</span></li>';
+  body.append(el('div', {class:'seg', role:'group', 'aria-label':'Режим таблиці'}, bRead, bTrain), el('div', {class:'scroll'}, table), rules);
+  return gapApi(gaps);
+});
+
+/* --- Übung 1: six short dialogues, one verb each --- */
+function dialog(scene, lines){
+  return function(body, id){
+    var gaps = [], box = el('div', {class:'dlg'});
+    lines.forEach(function(l){
+      var tx = el('span', {class:'tx'});
+      fillText(tx, l[1], id, gaps);
+      box.append(el('p', {class:'dl'}, el('span', {class:'sp'}, l[0] + ':'), tx));
+    });
+    body.append(el('p', {class:'scene'}, scene), box);
+    return gapApi(gaps);
+  };
+}
+var U1 = 'Встав дієслово у правильній формі.';
+exercise({id:'5-1a', nr:'Übung 1.1', short:'1.1', de:'Ergänze die Verben: „möchten“', ua:U1}, dialog('Im Café', [
+  ['Kellner', 'Guten Tag! Was {möchten} Sie trinken?'],
+  ['Vater', 'Ich {möchte} einen Kaffee, bitte.'],
+  ['Kellner', 'Und was {möchtest} du, Tim?'],
+  ['Tim', 'Ich {möchte} einen Apfelsaft. Und Lena {möchte} einen Kakao.'],
+  ['Kellner', '{Möchtet} ihr auch Kuchen?'],
+  ['Lena und Tim', 'Ja, wir {möchten} Schokoladenkuchen!'],
+  ['Vater', 'Die Kinder {möchten} immer Kuchen …']
+]));
+exercise({id:'5-1b', nr:'Übung 1.2', short:'1.2', de:'Ergänze die Verben: können', ua:U1}, dialog('In der Schule', [
+  ['Tim', 'Ich {kann} sehr schnell Fahrrad fahren.'],
+  ['Lena', 'Du {kannst} schnell fahren, aber ich {kann} besser schwimmen!'],
+  ['Lehrerin', '{Könnt} ihr auch ein Instrument spielen?'],
+  ['Lena und Tim', 'Ja, wir {können} Gitarre spielen. Und unsere Oma {kann} Klavier spielen.'],
+  ['Lehrerin', 'Super! Dann {können} alle zusammen Musik machen.']
+]));
+exercise({id:'5-1c', nr:'Übung 1.3', short:'1.3', de:'Ergänze die Verben: müssen', ua:U1}, dialog('Am Sonntagabend', [
+  ['Mutter', 'Morgen ist Schule. Ihr {müsst} früh ins Bett gehen.'],
+  ['Tim', 'Aber ich {muss} noch Mathe lernen!'],
+  ['Mutter', 'Dann {musst} du jetzt anfangen.'],
+  ['Lena', 'Und wir {müssen} noch die Taschen packen.'],
+  ['Mutter', 'Stimmt. Papa {muss} morgen auch früh aufstehen. Und Oma und Opa {müssen} um sieben Uhr zum Bahnhof fahren.']
+]));
+exercise({id:'5-1d', nr:'Übung 1.4', short:'1.4', de:'Ergänze die Verben: wollen', ua:U1}, dialog('Pläne für das Wochenende', [
+  ['Vater', 'Was {wollt} ihr am Wochenende machen?'],
+  ['Tim', 'Ich {will} in den Zoo gehen!'],
+  ['Vater', 'Lena, {willst} du auch in den Zoo?'],
+  ['Lena', 'Nein, ich {will} lieber ins Schwimmbad. Aber Tim {will} immer in den Zoo.'],
+  ['Mutter', 'Und wir Eltern {wollen} einfach zu Hause bleiben.'],
+  ['Vater', 'Die Kinder {wollen} aber raus. Also gehen wir zuerst in den Zoo.']
+]));
+exercise({id:'5-1e', nr:'Übung 1.5', short:'1.5', de:'Ergänze die Verben: dürfen', ua:U1}, dialog('Am Freitag', [
+  ['Lena', 'Mama, {darf} ich heute bei Mia schlafen?'],
+  ['Mutter', 'Ja, du {darfst}. Aber ihr {dürft} nicht bis Mitternacht fernsehen.'],
+  ['Lena', '{Dürfen} wir Pizza bestellen?'],
+  ['Mutter', 'Da musst du Mias Eltern fragen.'],
+  ['Tim', 'Das ist nicht fair! Lena {darf} immer alles!'],
+  ['Mutter', 'Tim, du hast Fieber. Kranke Kinder {dürfen} nicht raus.']
+]));
+exercise({id:'5-1f', nr:'Übung 1.6', short:'1.6', de:'Ergänze die Verben: sollen', ua:U1}, dialog('Nach der Schule', [
+  ['Tim', 'Der Lehrer sagt, ich {soll} mehr lesen.'],
+  ['Vater', 'Du {sollst} mehr lesen? Dann gehen wir in die Bibliothek.'],
+  ['Tim', '{Sollen} wir heute gehen?'],
+  ['Vater', 'Ja. Und Lena {soll} auch mitkommen.'],
+  ['Mutter', 'Aber Kinder, ihr {sollt} um sechs Uhr wieder zu Hause sein!']
+]));
+
+/* --- Übung 2: tick grid --- */
+exercise({id:'5-2', nr:'Übung 2', short:'2', de:'Welche Form passt? Kreuze an.', ua:'Познач усі форми, які підходять до займенника. У рядку може бути кілька правильних відповідей.'}, function(body, id){
+  var cols = ['will','kannst','sollen','dürft','muss','möchten','darf'];
+  var rows = [['ich',[0,4,6]], ['du',[1]], ['er, sie, es, man',[0,4,6]], ['wir',[2,5]], ['ihr',[3]], ['sie, Sie',[2,5]]];
+  var st = saved.w[id] = saved.w[id] || {};
+  var cells = [];
+  var table = el('table', {class:'grid'});
+  var hr = el('tr', {}, el('th', {}));
+  cols.forEach(function(c){ hr.append(el('th', {}, c)); });
+  hr.append(el('th', {class:'rest'}));
+  table.append(el('thead', {}, hr));
+  var tb = el('tbody');
+  rows.forEach(function(r, ri){
+    var tr = el('tr', {}, el('th', {scope:'row'}, r[0]));
+    cells[ri] = [];
+    cols.forEach(function(c, ci){
+      var k = ri + '-' + ci;
+      var b = el('button', {class:'tick', type:'button', 'aria-pressed': st[k] ? 'true' : 'false', 'aria-label': r[0] + ' ' + c});
+      b.textContent = st[k] ? '✗' : '';
+      b.addEventListener('click', function(){
+        var on = b.getAttribute('aria-pressed') !== 'true';
+        b.setAttribute('aria-pressed', String(on)); b.textContent = on ? '✗' : '';
+        b.classList.remove('ok','bad','miss');
+        if (on) st[k] = 1; else delete st[k];
+        save();
+      });
+      cells[ri][ci] = b;
+      tr.append(el('td', {}, b));
+    });
+    if (ri === 0) tr.append(el('td', {class:'rest', rowspan:rows.length}, '… ins Kino gehen.'));
+    tb.append(tr);
+  });
+  table.append(tb);
+  body.append(el('div', {class:'scroll'}, table));
+  function paint(reveal){
+    var good = 0;
+    rows.forEach(function(r, ri){
+      var rowOk = true;
+      cells[ri].forEach(function(b, ci){
+        var want = r[1].indexOf(ci) >= 0, k = ri + '-' + ci;
+        b.classList.remove('ok','bad','miss');
+        if (reveal){
+          b.setAttribute('aria-pressed', String(want)); b.textContent = want ? '✗' : '';
+          if (want) st[k] = 1; else delete st[k];
+          return;
+        }
+        var has = b.getAttribute('aria-pressed') === 'true';
+        if (has && want) b.classList.add('ok');
+        else if (has && !want) { b.classList.add('bad'); rowOk = false; }
+        else if (!has && want) { b.classList.add('miss'); rowOk = false; }
+      });
+      if (rowOk) good++;
+    });
+    return {c:good, t:rows.length};
+  }
+  return {
+    check: function(){ return paint(false); },
+    reveal: function(){ paint(true); },
+    reset: function(){ cells.forEach(function(row){ row.forEach(function(b){ b.setAttribute('aria-pressed','false'); b.textContent=''; b.classList.remove('ok','bad','miss'); }); }); for (var k in st) delete st[k]; }
+  };
+});
+
+/* --- Übung 3: build sentences from chips --- */
+exercise({id:'5-3', nr:'Übung 3', short:'3', de:'In den Ferien. Bilde Sätze.', ua:'Натискай на слова у правильному порядку. Щоб прибрати слово з речення, натисни на нього ще раз.'}, function(body, id){
+  var items = [
+    {w:['lange','wir','Am Samstag','wollen','schlafen'], e:'.', a:['Am Samstag wollen wir lange schlafen']},
+    {w:['einen Freund','Mein Bruder','besuchen','möchte'], e:'.', a:['Mein Bruder möchte einen Freund besuchen']},
+    {w:['arbeiten','Meine Eltern','leider auch','müssen','am Wochenende'], e:'.', a:['Meine Eltern müssen leider auch am Wochenende arbeiten','Meine Eltern müssen am Wochenende leider auch arbeiten']},
+    {w:['wir','einen Film','Am Abend','sehen','können','zusammen'], e:'.', a:['Am Abend können wir zusammen einen Film sehen','Am Abend können wir einen Film zusammen sehen']},
+    {w:['fernsehen','ich','nicht','Heute','darf'], e:'.', a:['Heute darf ich nicht fernsehen']},
+    {w:['kommen','wir','Wann','sollen'], e:'?', a:['Wann sollen wir kommen']}
+  ];
+  var st = saved.w[id] = saved.w[id] || {};
+  var rows = items.map(function(it, n){
+    var ans = el('div', {class:'ord-ans', 'aria-label':'Satz ' + (n+1)});
+    var bk = el('div', {class:'ord-bank'});
+    var sol = el('div', {class:'sol'});
+    var chips = it.w.map(function(w, i){
+      var c = el('button', {class:'chip', type:'button', 'data-i':i}, w);
+      c.addEventListener('click', function(){
+        (c.parentNode === bk ? ans : bk).append(c);
+        ans.classList.remove('ok','bad'); sol.textContent = '';
+        st[n] = $$('.chip', ans).map(function(x){ return +x.getAttribute('data-i'); });
+        save();
+      });
+      bk.append(c);
+      return c;
+    });
+    (st[n] || []).forEach(function(i){ if (chips[i]) ans.append(chips[i]); });
+    body.append(el('div', {class:'ord'},
+      el('div', {class:'ord-line'}, el('span', {class:'ord-n'}, (n+1) + '.'), ans, el('span', {class:'ord-end'}, it.e)),
+      bk, sol));
+    return {it:it, ans:ans, bk:bk, sol:sol, chips:chips};
+  });
+  function sentence(r){ return $$('.chip', r.ans).map(function(c){ return c.textContent; }).join(' '); }
+  return {
+    check: function(){
+      var c = 0;
+      rows.forEach(function(r){
+        var ok = r.bk.children.length === 0 && r.it.a.indexOf(sentence(r)) >= 0;
+        r.ans.classList.remove('ok','bad'); r.ans.classList.add(ok ? 'ok' : 'bad');
+        if (ok) c++;
+      });
+      return {c:c, t:rows.length};
+    },
+    reveal: function(){ rows.forEach(function(r){ r.sol.textContent = r.it.a[0] + r.it.e; }); },
+    reset: function(){ rows.forEach(function(r, n){ r.chips.forEach(function(c){ r.bk.append(c); }); r.ans.classList.remove('ok','bad'); r.sol.textContent = ''; delete st[n]; }); }
+  };
+});
+
+/* --- sentence writing (shared by 5-4 and 6-6) --- */
+function writing(items, mode){
+  return function(body, id){
+    var rows = items.map(function(it, n){
+      var inp = el('input', {type:'text', id:id + '-s' + n, autocomplete:'off', spellcheck:'false', 'aria-label':'Satz ' + (n+1)});
+      inp.value = saved.v[inp.id] || '';
+      var sol = el('div', {class:'sol'});
+      var hint = el('div', {class:'wr-hint'});
+      if (it.sp) hint.append(el('b', {}, it.sp + ':'));
+      if (it.verb) hint.append(el('span', {class:'verb'}, it.verb + ':'));
+      hint.append(el('span', {}, it.h));
+      body.append(el('div', {class:'wr'}, hint, inp, sol));
+      return {it:it, inp:inp, sol:sol};
+    });
+    return {
+      check: function(){
+        var c = 0;
+        rows.forEach(function(r){
+          var v = r.inp.value.trim(), ok;
+          if (mode === 'free') ok = /^soll(en|st|t)?\s/i.test(v) && /\?$/.test(v) && v.split(/\s+/).length >= 3;
+          else ok = r.it.a.some(function(a){ return normSent(a) === normSent(v); });
+          r.inp.classList.remove('ok','bad'); r.inp.classList.add(ok ? 'ok' : 'bad');
+          if (mode === 'free') r.sol.textContent = ok ? 'z. B.: ' + r.it.a[0] : 'Почни із Soll… / Sollen… і постав знак питання.';
+          if (ok) c++;
+        });
+        return {c:c, t:rows.length};
+      },
+      reveal: function(){ rows.forEach(function(r){ r.sol.textContent = (mode === 'free' ? 'z. B.: ' : '') + r.it.a[0]; }); },
+      reset: function(){ rows.forEach(function(r){ r.inp.classList.remove('ok','bad'); setVal(r.inp, ''); r.sol.textContent = ''; }); }
+    };
+  };
+}
+exercise({id:'5-4', nr:'Übung 4', lv:'A2', short:'4', de:'Im Schwimmbad. Schreibe Sätze.', ua:'Напиши речення. Постав модальне дієслово в потрібну форму і на правильне місце.'}, writing([
+  {sp:'Gast', verb:'möchten', h:'ich • zwei Tickets • kaufen • .', a:['Ich möchte zwei Tickets kaufen.']},
+  {sp:'Kassiererin', verb:'können', h:'Sie • hier • nur mit Karte • bezahlen • .', a:['Sie können hier nur mit Karte bezahlen.','Hier können Sie nur mit Karte bezahlen.']},
+  {sp:'Gast', verb:'dürfen', h:'mein Sohn • allein • schwimmen • ?', a:['Darf mein Sohn allein schwimmen?']},
+  {sp:'Kassiererin', verb:'müssen', h:'Kinder unter zehn Jahren • mit einem Erwachsenen • kommen • .', a:['Kinder unter zehn Jahren müssen mit einem Erwachsenen kommen.']},
+  {sp:'Gast', verb:'sollen', h:'wo • wir • die Taschen • lassen • ?', a:['Wo sollen wir die Taschen lassen?']},
+  {sp:'Kassiererin', verb:'können', h:'Sie • die Taschen • in den Schrank • legen • .', a:['Sie können die Taschen in den Schrank legen.']}
+]));
+
+/* =====================================================================
+   LEKTION 6
+   ===================================================================== */
+function textEx(words, paras, only){
+  return function(body, id){
+    var gaps = [];
+    if (words) body.append(bank('Wörter:', words));
+    paras.forEach(function(t){
+      var p = el('p', {class:'gaptext'});
+      fillText(p, t, id, gaps, only);
+      body.append(p);
+    });
+    return gapApi(gaps);
+  };
+}
+exercise({id:'6-1', nr:'Übung 1', short:'1', de:'müssen, „möchten“ oder können? Ergänze.', ua:'Вибери одне з трьох дієслів і встав у правильній формі.'}, textEx(['müssen','möchten','können'], [
+  'Jonas ist zwölf Jahre alt. Er {möchte} heute gern Fußball spielen, aber er {muss} zuerst Hausaufgaben machen. Seine Schwester Mila ist erst drei. Sie {kann} noch nicht lesen, aber sie {möchte} schon gern Bücher ansehen wie Jonas. Fahrrad fahren {kann} sie auch noch nicht.',
+  'Der Vater von Jonas ist Koch. Er {muss} auch am Wochenende arbeiten. Im August hat er frei, dann {kann|möchte} die Familie zusammen an den See fahren. Heute hat Jonas Fieber. Er {kann} nicht in die Schule gehen, er {muss} im Bett bleiben.'
+]));
+
+/* --- Übung 2: signs --- */
+function signSvg(kind){
+  var R = 'var(--sign-red)', B = 'var(--sign-blue)', W = 'var(--sign-white)', K = 'var(--sign-black)';
+  var ban = '<circle cx="32" cy="32" r="27" fill="'+W+'" stroke="'+R+'" stroke-width="6"/>';
+  var slash = '<line x1="13" y1="13" x2="51" y2="51" stroke="'+R+'" stroke-width="5" stroke-linecap="round"/>';
+  var must = '<circle cx="32" cy="32" r="30" fill="'+B+'"/>';
+  var info = '<rect x="3" y="3" width="58" height="58" rx="6" fill="'+B+'"/>';
+  var p = {
+    phone: ban + '<rect x="24" y="14" width="16" height="36" rx="3" fill="'+K+'"/><rect x="27" y="19" width="10" height="22" fill="'+W+'"/><circle cx="32" cy="45.5" r="1.8" fill="'+W+'"/>' + slash,
+    stop: '<polygon points="20,3 44,3 61,20 61,44 44,61 20,61 3,44 3,20" fill="'+R+'"/><polygon points="21.5,7 42.5,7 57,21.5 57,42.5 42.5,57 21.5,57 7,42.5 7,21.5" fill="none" stroke="'+W+'" stroke-width="2"/><text x="32" y="37.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="15" fill="'+W+'">STOP</text>',
+    park: info + '<text x="32" y="47" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="42" fill="'+W+'">P</text>',
+    helmet: must + '<path d="M16 38a16 16 0 0 1 32 0z" fill="'+W+'"/><rect x="13" y="38" width="40" height="5" rx="2.5" fill="'+W+'"/><path d="M32 22v16" stroke="'+B+'" stroke-width="2.5" fill="none"/>',
+    bike: ban + '<g fill="none" stroke="'+K+'" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="40" r="7.5"/><circle cx="44" cy="40" r="7.5"/><path d="M20 40L28 27H40L44 40M28 27L33 40L40 27M25 24h6M38 22l2 5"/></g>' + slash,
+    arrow: must + '<path d="M32 11L47 30H37.5V53H26.5V30H17Z" fill="'+W+'"/>',
+    swim: ban + '<circle cx="40" cy="25" r="4.5" fill="'+K+'"/><path d="M20 34L35 29" stroke="'+K+'" stroke-width="5" stroke-linecap="round" fill="none"/><path d="M13 41q5-5 10 0t10 0t10 0t9 0M15 48q5-5 10 0t10 0t10 0" stroke="'+K+'" stroke-width="2.8" stroke-linecap="round" fill="none"/>' + slash,
+    play: info + '<circle cx="24" cy="18" r="5" fill="'+W+'"/><path d="M24 23V39M15 31L33 28M24 39L17 52M24 39L31 51" stroke="'+W+'" stroke-width="3.5" stroke-linecap="round" fill="none"/><circle cx="45" cy="46" r="6.5" fill="'+W+'"/>'
+  };
+  return '<svg viewBox="0 0 64 64" role="img" aria-hidden="true">' + p[kind] + '</svg>';
+}
+exercise({id:'6-2', nr:'Übung 2', short:'2', de:'müssen oder dürfen? Ergänze und ordne die Schilder zu.', ua:'Встав дієслово і вибери літеру знака, який підходить до речення.'}, function(body, id){
+  var signs = [['A','arrow'],['B','swim'],['C','park'],['D','stop'],['E','phone'],['F','play'],['G','helmet'],['H','bike']];
+  var items = [
+    ['Hier {darf} man nicht telefonieren.','E'],
+    ['Hier {muss} man anhalten.','D'],
+    ['Hier {darf} man parken.','C'],
+    ['Hier {muss} man einen Helm tragen.','G'],
+    ['Hier {darf} man nicht Fahrrad fahren.','H'],
+    ['Hier {muss} man geradeaus fahren.','A'],
+    ['Hier {darf} man nicht schwimmen.','B'],
+    ['Hier {dürfen} Kinder spielen.','F']
+  ];
+  var grid = el('div', {class:'signs'});
+  signs.forEach(function(s){
+    var d = el('div', {class:'sign'});
+    d.innerHTML = signSvg(s[1]);
+    d.append(el('b', {}, s[0]));
+    grid.append(d);
+  });
+  var gaps = [], sels = [];
+  var list = el('div', {class:'slist'});
+  items.forEach(function(it, n){
+    var sel = el('select', {id:id + '-sel' + n, 'aria-label':'Schild für Satz ' + (n+1)}, el('option', {value:''}, '?'));
+    signs.forEach(function(s){ sel.append(el('option', {value:s[0]}, s[0])); });
+    sel.value = saved.v[sel.id] || '';
+    var tx = el('span', {});
+    tx.append((n+1) + '. ');
+    fillText(tx, it[0], id, gaps);
+    sels.push({sel:sel, a:it[1]});
+    list.append(el('div', {class:'srow'}, sel, tx));
+  });
+  body.append(bank('Wörter:', ['müssen','dürfen']), grid, list);
+  var g = gapApi(gaps);
+  return {
+    check: function(){
+      var r = g.check(), c = r.c;
+      sels.forEach(function(s){ var ok = s.sel.value === s.a; s.sel.classList.remove('ok','bad','shown'); s.sel.classList.add(ok ? 'ok' : 'bad'); if (ok) c++; });
+      return {c:c, t:r.t + sels.length};
+    },
+    reveal: function(){ g.reveal(); sels.forEach(function(s){ s.sel.classList.remove('ok','bad'); s.sel.classList.add('shown'); setVal(s.sel, s.a); }); },
+    reset: function(){ g.reset(); sels.forEach(function(s){ s.sel.classList.remove('ok','bad','shown'); setVal(s.sel, ''); }); }
+  };
+});
+
+/* --- Übung 3: which meaning of können --- */
+exercise({id:'6-3', nr:'Übung 3', short:'3', de:'können: 1, 2 oder 3? Markiere.', ua:'Після кожного речення вибери значення дієслова können.'}, function(body, id){
+  var items = [
+    'Mein Opa kann sehr gut kochen {1}, aber heute ist kein Gas da. Er kann nicht kochen. {2}',
+    'Kannst du Spanisch? {1} Dann kannst du im Sommer in Madrid arbeiten! {2}',
+    'Mama, kann ich heute länger aufbleiben? {3}',
+    'Die Lehrerin sagt: „Ihr könnt jetzt nach Hause gehen.“ {3}',
+    'Ich kann nicht mitkommen {2}, ich habe keine Zeit. Und ich kann auch nicht Ski fahren! {1}',
+    'Im Hotel gibt es ein Schwimmbad. Dort können die Gäste jeden Tag schwimmen. {2}'
+  ];
+  var st = saved.w[id] = saved.w[id] || {};
+  var picks = [];
+  var keys = el('div', {class:'keys'});
+  keys.innerHTML = '<div><b>1</b>Fähigkeit: Ich weiß, wie das geht. <span class="ua">(вмію)</span></div><div><b>2</b>Möglichkeit: Es ist (nicht) möglich. <span class="ua">(є / немає можливості)</span></div><div><b>3</b>Erlaubnis: Es ist okay. <span class="ua">(можна)</span></div>';
+  body.append(keys);
+  items.forEach(function(t, n){
+    var p = el('p', {class:'mk'});
+    p.append((n+1) + '. ');
+    parse(t).forEach(function(part){
+      if (typeof part === 'string') { p.append(part); return; }
+      var k = picks.length, grp = el('span', {class:'pick', role:'group', 'aria-label':'Bedeutung'}), btns = [];
+      [1,2,3].forEach(function(v){
+        var b = el('button', {type:'button', 'aria-pressed': st[k] === v ? 'true' : 'false'}, String(v));
+        b.addEventListener('click', function(){
+          st[k] = v; save(); grp.classList.remove('ok','bad');
+          btns.forEach(function(x, i){ x.setAttribute('aria-pressed', String(i === v-1)); x.classList.remove('right'); });
+        });
+        btns.push(b); grp.append(b);
+      });
+      picks.push({grp:grp, btns:btns, a:+part.a[0], k:k});
+      p.append(grp);
+    });
+    body.append(p);
+  });
+  return {
+    check: function(){ var c = 0; picks.forEach(function(x){ var ok = st[x.k] === x.a; x.grp.classList.remove('ok','bad'); x.grp.classList.add(ok ? 'ok' : 'bad'); if (ok) c++; }); return {c:c, t:picks.length}; },
+    reveal: function(){ picks.forEach(function(x){ x.btns.forEach(function(b, i){ b.classList.toggle('right', i === x.a-1); }); }); },
+    reset: function(){ picks.forEach(function(x){ delete st[x.k]; x.grp.classList.remove('ok','bad'); x.btns.forEach(function(b){ b.setAttribute('aria-pressed','false'); b.classList.remove('right'); }); }); }
+  };
+});
+
+exercise({id:'6-4', nr:'Übung 4', short:'4', de:'wollen oder „möchten“? Ergänze.', ua:'„Möchten“ підходить завжди. Після перевірки побачиш, де можна сказати і wollen, а де тільки ввічливе „möchten“.'}, textEx(['möchten','wollen'], [
+  '1. In der Bäckerei: — Guten Morgen! Was {möchten} Sie? — Ich {möchte} bitte vier Brötchen.',
+  '2. Mein kleiner Bruder {möchte|will} nie ins Bett gehen.',
+  '3. Frau Weber, ich {möchte} Sie etwas fragen. Haben Sie kurz Zeit?',
+  '4. Emma ist 13 und {möchte|will} Sängerin werden. Aber ihre Eltern {möchten|wollen} lieber eine Ärztin in der Familie.',
+  '5. Am Telefon: Guten Tag, ich {möchte} bitte einen Termin machen.',
+  '6. Wir {möchten|wollen} im Sommer nach Italien fahren.',
+  '7. Du kannst Tee oder Saft haben, wie du {möchtest|willst}.'
+], 'nur „möchten“ (höflich)'));
+
+exercise({id:'6-5', nr:'Übung 5', short:'5', de:'Vor dem Spiel. müssen oder sollen? Ergänze.', ua:'müssen — людина сама каже «треба». sollen — ти переказуєш, що сказав хтось інший, або щось пропонуєш у питанні.'}, textEx(['müssen','sollen'], [
+  'Lena ist im Handballteam. Am Samstag ist ein wichtiges Spiel, Lena {muss} fit sein. Die Trainerin sagt: „Ihr {müsst|sollt} pünktlich um neun Uhr da sein und ihr {müsst|sollt} viel Wasser mitbringen.“',
+  'Zu Hause erzählt Lena: „Die Trainerin sagt, wir {sollen|müssen} um neun Uhr da sein. Und ich {soll|muss} viel Wasser mitbringen.“ Die Mutter fragt: „{Soll} ich dich zur Halle fahren?“ Lena antwortet: „Ja, bitte! Aber wir {müssen} früh losfahren, die Halle ist weit weg.“'
+]));
+
+exercise({id:'6-6', nr:'Übung 6', short:'6', de:'Mache Vorschläge mit sollen.', ua:'Запропонуй щось у відповідь, почавши із Soll ich …? або Sollen wir …?. Правильних відповідей багато, після перевірки з’явиться приклад.'}, function(body, id){
+  body.append(el('p', {class:'sticky-note'}, 'Ich habe Durst. → Soll ich dir ein Glas Wasser bringen?'));
+  return writing([
+    {h:'1. Ich habe Hunger.', a:['Sollen wir eine Pizza bestellen?']},
+    {h:'2. Es ist sehr warm im Zimmer.', a:['Soll ich das Fenster aufmachen?']},
+    {h:'3. Ich verstehe die Mathe-Aufgabe nicht.', a:['Soll ich dir helfen?']},
+    {h:'4. Wir haben kein Brot mehr.', a:['Soll ich Brot kaufen?']},
+    {h:'5. Ich möchte das neue Museum sehen.', a:['Sollen wir am Samstag zusammen ins Museum gehen?']},
+    {h:'6. Mein Handy ist leer.', a:['Soll ich dir mein Ladekabel geben?']}
+  ], 'free')(body, id);
+});
+
+exercise({id:'6-7', nr:'Übung 7', lv:'A2', short:'7', de:'Was passt? Es gibt mehrere Möglichkeiten.', ua:'У багатьох пропусках підходить кілька дієслів. Після перевірки побачиш інші правильні варіанти.'}, textEx(['müssen','können','dürfen','möchten','wollen'], [
+  'Im Kino: Man {kann|darf} Popcorn essen. Man {muss} ein Ticket kaufen. Man {darf|kann|soll} nicht laut telefonieren, aber man {darf|kann} lachen.',
+  'Im Zoo: Man {kann|darf} viele Tiere sehen. Man {darf|soll} die Tiere nicht füttern. Man {muss} Eintritt bezahlen, und man {kann|darf} Fotos machen.',
+  'Du hast Fieber: Du {musst|sollst} im Bett bleiben. Du {darfst|kannst|sollst|musst} nicht in die Schule gehen, und du {musst|sollst} viel Tee trinken.',
+  'Du willst fit sein: Du {musst|sollst} oft Sport machen. Du {darfst|sollst|kannst} nicht so viele Chips essen, und du {musst|sollst} genug schlafen.',
+  'Kinder mit zwölf Jahren: Sie {dürfen|können} nicht Auto fahren. Sie {müssen} in die Schule gehen. Sie {wollen|möchten} oft lange am Handy spielen.',
+  'Im Bus: Man {muss} ein Ticket haben. Man {darf|soll|kann} nicht mit dem Fahrer sprechen, aber man {kann|darf} mit Kopfhörern Musik hören.'
+]));
+
+/* =====================================================================
+   page chrome
+   ===================================================================== */
+var PAGES = ['lektion5','lektion6','ergebnis'];
+function go(tab, noScroll){
+  if (PAGES.indexOf(tab) < 0) tab = PAGES[0];
+  PAGES.forEach(function(p){ document.getElementById(p).hidden = p !== tab; });
+  $$('.tab').forEach(function(b){ b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === tab)); });
+  try { history.replaceState(null, '', '#' + tab); } catch (e) {}
+  if (!noScroll) window.scrollTo(0, 0);
+}
+$$('.tab').forEach(function(b){ b.addEventListener('click', function(){ go(b.getAttribute('data-tab')); }); });
+$$('[data-go]').forEach(function(b){ b.addEventListener('click', function(){ go(b.getAttribute('data-go')); }); });
+
+/* jump chips + result table */
+var chips = {};
+EX.forEach(function(x){
+  var pageId = x.host.closest('.page').id;
+  var j = $('[data-jump="' + pageId + '"]');
+  var b = el('button', {type:'button', onclick:function(){ x.host.scrollIntoView({block:'start'}); window.scrollBy(0, -80); }}, x.meta.short);
+  chips[x.meta.id] = b; j.append(b);
+});
+function refresh(){
+  var body = $('#res-body'), c = 0, t = 0, any = false;
+  body.textContent = '';
+  EX.forEach(function(x){
+    var s = saved.s[x.meta.id], chip = chips[x.meta.id];
+    var page = x.host.closest('.page').id === 'lektion5' ? 'L5' : 'L6';
+    chip.className = s ? (s.c === s.t ? 'full' : 'done') : '';
+    chip.textContent = x.meta.short + (s ? ' · ' + s.c + '/' + s.t : '');
+    body.append(el('tr', {}, el('td', {}, page + ' · ' + x.meta.nr + ' — ' + x.meta.de), el('td', {}, s ? s.c + ' / ' + s.t : '—')));
+    if (s) { c += s.c; t += s.t; any = true; }
+  });
+  $('#res-total').textContent = any ? c + ' / ' + t + '  (' + Math.round(c / t * 100) + ' %)' : '—';
+}
+refresh();
+
+/* wipe everything: two-step button, no dialogs */
+var wipe = $('#wipe'), armed = false, timer;
+wipe.addEventListener('click', function(){
+  if (!armed){
+    armed = true; wipe.textContent = 'Натисни ще раз, щоб очистити';
+    timer = setTimeout(function(){ armed = false; wipe.textContent = 'Очистити всі відповіді'; }, 4000);
+    return;
+  }
+  clearTimeout(timer); armed = false; wipe.textContent = 'Очистити всі відповіді';
+  EX.forEach(function(x){ x.clear(); });
+  saved.s = {}; setVal($('#student-name'), ''); save(); refresh();
+});
+
+/* persist typed values; clear stale marks while editing */
+document.addEventListener('input', function(e){
+  var t = e.target;
+  if (!t.id || !/^(INPUT|SELECT|TEXTAREA)$/.test(t.tagName)) return;
+  t.classList.remove('ok','bad','shown');
+  saved.v[t.id] = t.value; save();
+});
+$('#student-name').value = saved.v['student-name'] || '';
+
+/* translation toggle */
+var uaBtn = $('#ua-toggle');
+uaBtn.addEventListener('click', function(){
+  var hide = !$('#usage').classList.contains('no-ua');
+  $('#usage').classList.toggle('no-ua', hide);
+  uaBtn.setAttribute('aria-pressed', String(!hide));
+  uaBtn.textContent = hide ? 'Показати переклад' : 'Сховати переклад';
+});
+
+/* text size */
+var SIZES = [100, 112.5, 125, 140];
+function size(i){ saved.size = Math.max(0, Math.min(SIZES.length - 1, i)); document.documentElement.style.fontSize = SIZES[saved.size] + '%'; save(); }
+$('#size-down').addEventListener('click', function(){ size((saved.size || 0) - 1); });
+$('#size-up').addEventListener('click', function(){ size((saved.size || 0) + 1); });
+size(saved.size || 0);
+
+/* umlaut keys type into the field that had focus last */
+var lastField = null;
+document.addEventListener('focusin', function(e){
+  var t = e.target;
+  if ((t.tagName === 'INPUT' && t.type === 'text') || t.tagName === 'TEXTAREA') lastField = t;
+});
+$$('.uml button').forEach(function(b){
+  b.addEventListener('pointerdown', function(e){ e.preventDefault(); });
+  b.addEventListener('click', function(){
+    var f = lastField; if (!f || !f.isConnected) return;
+    var s = f.selectionStart == null ? f.value.length : f.selectionStart, e2 = f.selectionEnd == null ? s : f.selectionEnd;
+    f.value = f.value.slice(0, s) + b.getAttribute('data-ch') + f.value.slice(e2);
+    f.focus(); try { f.setSelectionRange(s + 1, s + 1); } catch (err) {}
+    f.dispatchEvent(new Event('input', {bubbles:true}));
+  });
+});
+
+go((location.hash || '').slice(1), true);
+})();
+</script>
+
+</body></html>
